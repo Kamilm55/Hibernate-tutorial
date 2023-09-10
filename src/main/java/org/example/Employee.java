@@ -2,6 +2,8 @@ package org.example;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity()
 @Table(name = "employees")
 public class Employee {
@@ -13,16 +15,18 @@ public class Employee {
 
     //    @Transient
     private int salary;
-    @OneToOne(targetEntity = Laptop.class , cascade = CascadeType.ALL)
-    private Laptop laptop;
+//    @OneToOne(targetEntity = Laptop.class , cascade = CascadeType.ALL) // One Emp => One laptop
+    @OneToMany(targetEntity = Laptop.class , cascade = CascadeType.ALL , mappedBy = "employee") // One Emp => Many laptops
+    private List<Laptop> laptop;
 
-    public Laptop getLaptop() {
+    public List<Laptop> getLaptop() {
         return laptop;
     }
 
-    public void setLaptop(Laptop laptop) {
+    public void setLaptop(List<Laptop> laptop) {
         this.laptop = laptop;
     }
+
     public long getId() {
         return id;
     }
