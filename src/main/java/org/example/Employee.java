@@ -7,11 +7,22 @@ import jakarta.persistence.*;
 public class Employee {
     @Id  // every '@Entity' class must declare or inherit at least one '@Id' or '@EmbeddedId' property
 //    @Column(name = "employee_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private long id;
    private FullName ful_name ;
-//    @Transient
-    private int salary;
 
+    //    @Transient
+    private int salary;
+    @OneToOne(targetEntity = Laptop.class , cascade = CascadeType.ALL)
+    private Laptop laptop;
+
+    public Laptop getLaptop() {
+        return laptop;
+    }
+
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
+    }
     public long getId() {
         return id;
     }

@@ -15,14 +15,16 @@ public class App
         FullName eFName = new FullName();
         eFName.setFirstName("Emp");
         eFName.setLastName("Lastname");
-       Employee employee = new Employee();
-       employee.setId(3);
+
+        Laptop empLaptop = new Laptop();
+//        empLaptop.setLid(101);
+        empLaptop.setName("HP");
+        Employee employee = new Employee();
        employee.setFul_name(eFName);
        employee.setSalary(1200);
-
-//        System.out.println(employee);
-
-        Configuration config = new Configuration().configure().addAnnotatedClass(Employee.class);
+       employee.setLaptop(empLaptop);
+/////////////////////////////////////
+        Configuration config = new Configuration().configure().addAnnotatedClass(Employee.class).addAnnotatedClass(Laptop.class);
 
         SessionFactory sessionFactory = config.buildSessionFactory();
         Session session = sessionFactory.openSession();
@@ -31,7 +33,8 @@ public class App
 
 
         session.save(employee);
-        Employee getemployee = session.get(Employee.class,3);
+        Employee getemployee = session.get(Employee.class,4);
+//        session.delete(getemployee);
         tx.commit();
 
         System.out.println(getemployee);
