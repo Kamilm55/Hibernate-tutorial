@@ -26,9 +26,10 @@ public class App
         laptopList.add(empLaptop);
         laptopList.add(empLaptop2);
         empLaptop.setName("HP");
+        empLaptop2.setName("Toshiba");
         Employee employee = new Employee();
        employee.setFul_name(eFName);
-       employee.setSalary(1200);
+       employee.setSalary(1400);
        employee.setLaptop(laptopList);
         empLaptop.setEmployee(employee);
         empLaptop2.setEmployee(employee);
@@ -40,13 +41,16 @@ public class App
 
         Transaction tx = session.beginTransaction();
 //////////////////CRUD OPERATIONS//////////
-        session.save(employee);
+//        session.save(employee);
+
+       Employee getemployee = session.get(Employee.class,4);
+        System.out.println(getemployee);
+
+        for(Laptop laptop : getemployee.getLaptop()) System.out.println(laptop);
 
 
-//        Laptop getLaptop = session.get(Laptop.class,10);
 //        session.delete(getLaptop);
         tx.commit();
 
-//        System.out.println(getemployee);
     }
 }

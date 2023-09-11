@@ -16,7 +16,7 @@ public class Employee {
     //    @Transient
     private int salary;
 //    @OneToOne(targetEntity = Laptop.class , cascade = CascadeType.ALL) // One Emp => One laptop
-    @OneToMany(targetEntity = Laptop.class , cascade = CascadeType.ALL , mappedBy = "employee") // One Emp => Many laptops
+    @OneToMany(targetEntity = Laptop.class , cascade = CascadeType.ALL ,mappedBy = "employee") // One Emp => Many laptops
     private List<Laptop> laptop;
 
     public List<Laptop> getLaptop() {
