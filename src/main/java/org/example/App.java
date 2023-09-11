@@ -30,7 +30,7 @@ public class App
         empLaptop2.setName("Toshiba");
         Employee employee = new Employee();
        employee.setFul_name(eFName);
-       employee.setSalary(1400);
+       employee.setSalary(3600);
        employee.setLaptop(laptopList);
         empLaptop.setEmployee(employee);
         empLaptop2.setEmployee(employee);
@@ -40,27 +40,17 @@ public class App
         SessionFactory sessionFactory = config.buildSessionFactory();
         Session session = sessionFactory.openSession();
 
-        Transaction tx = session.beginTransaction();
 //////////////////CRUD OPERATIONS//////////
-//        session.save(employee);
+        Transaction tx = session.beginTransaction(); // default transient mode before transactions
+        session.save(employee);// persistence mode
 
-//        for (int i=0;i<10;i++){
-//            Employee employee1 = new Employee();
-//            employee1.setSalary(1200 + i * 100);
-//            session.save(employee1);
-//        }
-        int salary = 2000;
-        Query query = session.createNativeQuery("select * from employees  where salary > :salary", Employee.class);
-        query.setParameter("salary" , salary);
-        List<Employee> employeeList = query.list();
-//        Long count = (Long) query.uniqueResult();
-//        System.out.println(count);
-//
-        for(Employee emp : employeeList )   System.out.println(emp);
+//        session.detach(employee); // detach mode
+        employee.setSalary(5420);// this does not affect data in database , because it is detach mode
+        session.remove(employee);// removed mode
 
-
-//        session.delete(getLaptop);
+        employee.setSalary(1234);
         tx.commit();
+//        employee.setSalary(2420); // this does not affect data in database
 
     }
 }
