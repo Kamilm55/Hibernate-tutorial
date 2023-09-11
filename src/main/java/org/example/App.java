@@ -6,6 +6,7 @@ import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
 import java.util.ArrayList;
@@ -43,10 +44,19 @@ public class App
 //////////////////CRUD OPERATIONS//////////
 //        session.save(employee);
 
-       Employee getemployee = session.get(Employee.class,4);
-        System.out.println(getemployee);
-
-        for(Laptop laptop : getemployee.getLaptop()) System.out.println(laptop);
+//        for (int i=0;i<10;i++){
+//            Employee employee1 = new Employee();
+//            employee1.setSalary(1200 + i * 100);
+//            session.save(employee1);
+//        }
+        int salary = 2000;
+        Query query = session.createNativeQuery("select * from employees  where salary > :salary", Employee.class);
+        query.setParameter("salary" , salary);
+        List<Employee> employeeList = query.list();
+//        Long count = (Long) query.uniqueResult();
+//        System.out.println(count);
+//
+        for(Employee emp : employeeList )   System.out.println(emp);
 
 
 //        session.delete(getLaptop);

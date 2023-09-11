@@ -17,6 +17,7 @@
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -35,6 +36,7 @@
       <artifactId>hibernate-core</artifactId>
       <version>6.3.0.Final</version>
     </dependency>
+
 
   </dependencies>
 </project>
